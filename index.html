@@ -3,143 +3,297 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Biodiversity for Sustainability — Quizzes</title>
+<title>Biodiversity for Sustainability</title>
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f4f6f8;
-  color:#222;
-  min-height:100vh;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-.wrap{max-width:1050px;margin:0 auto;padding:42px 20px 90px}
-header{text-align:center;padding:5px 0 32px}
-h1{font-size:clamp(34px,5vw,52px);font-weight:800;color:#000;margin-bottom:12px}
-.subtitle{font-size:17px;line-height:1.6;color:#58708d;max-width:760px;margin:0 auto}
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:22px;
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #222;
+  min-height: 100vh;
 }
-.card{
-  background:#fff;
-  padding:28px;
-  border-radius:20px;
-  border:1px solid #d8e1ff;
-  box-shadow:0 10px 30px rgba(0,0,0,.08);
-  display:flex;
-  flex-direction:column;
-  min-height:285px;
+
+.wrap {
+  width: 100%;
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 42px 24px 70px;
 }
-.topline{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom:20px;
+
+header {
+  text-align: center;
+  padding: 5px 0 38px;
 }
-.badge{
-  display:inline-block;
-  background:#eef2ff;
-  color:#2839a8;
-  font-weight:700;
-  padding:8px 14px;
-  border-radius:20px;
+
+h1 {
+  font-size: clamp(36px, 5vw, 54px);
+  font-weight: 800;
+  color: #000;
+  margin-bottom: 12px;
 }
-.status{
-  font-size:13px;
-  font-weight:700;
-  color:#58708d;
+
+.subtitle {
+  color: #58708d;
+  font-size: 17px;
+  line-height: 1.6;
 }
-h2{font-size:25px;line-height:1.3;color:#111;margin-bottom:12px}
-.card p{font-size:16px;line-height:1.65;color:#58708d;flex:1}
-.meta{font-size:15px;font-weight:700;color:#222;margin:20px 0}
-.btn{
-  display:block;
-  width:100%;
-  padding:15px;
-  text-align:center;
-  background:#111827;
-  color:#fff;
-  text-decoration:none;
-  font-size:17px;
-  font-weight:700;
-  border-radius:13px;
-  transition:.2s;
+
+/* TOP ROW — first three tests */
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
 }
-.btn:hover{background:#252d3d;transform:translateY(-2px)}
-.footer-note{
-  text-align:center;
-  margin-top:32px;
-  font-size:14px;
-  color:#58708d;
+
+.card {
+  background: #fff;
+  border: 1px solid #d8e1ff;
+  border-radius: 20px;
+  padding: 27px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0,0,0,.07);
+  transition: transform .2s ease, box-shadow .2s ease;
 }
-@media(max-width:700px){
-  .wrap{padding:28px 15px 70px}
-  header{padding-bottom:25px}
-  .subtitle{font-size:15px}
-  .grid{grid-template-columns:1fr;gap:16px}
-  .card{padding:22px;min-height:0}
-  h2{font-size:22px}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 34px rgba(0,0,0,.11);
+}
+
+.badge {
+  display: inline-block;
+  width: fit-content;
+  background: #eef2ff;
+  color: #2839a8;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  font-size: 24px;
+  line-height: 1.3;
+  color: #111827;
+  margin-bottom: 13px;
+}
+
+.card p {
+  color: #58708d;
+  font-size: 15.5px;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.meta {
+  color: #222;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 18px 0;
+}
+
+.open-btn {
+  width: 100%;
+  border: 0;
+  border-radius: 13px;
+  padding: 15px;
+  background: #111827;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  transition: background .2s ease, transform .2s ease;
+}
+
+.open-btn:hover {
+  background: #252d3d;
+  transform: translateY(-2px);
+}
+
+/* COMBINED QUIZ — separate bottom line */
+.combined-wrapper {
+  margin-top: 28px;
+  padding: 4px;
+  border-radius: 25px;
+
+  /* Constantly changing colorful border */
+  background: linear-gradient(
+    90deg,
+    #ff3cac,
+    #784ba0,
+    #2b86c5,
+    #20e3b2,
+    #ffe53b,
+    #ff3cac
+  );
+  background-size: 400% 400%;
+  animation: movingBorder 5s linear infinite;
+}
+
+@keyframes movingBorder {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.combined-card {
+  background: #fff;
+  border-radius: 21px;
+  padding: 32px 36px;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.combined-card .badge {
+  background: #111827;
+  color: #fff;
+  margin-bottom: 15px;
+}
+
+.combined-card h2 {
+  font-size: 29px;
+  margin-bottom: 10px;
+}
+
+.combined-card p {
+  max-width: 750px;
+  color: #58708d;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.combined-meta {
+  font-weight: 700;
+  margin: 16px 0;
+}
+
+.combined-btn {
+  width: min(420px, 100%);
+}
+
+/* Footer */
+.footer-note {
+  text-align: center;
+  margin-top: 30px;
+  color: #58708d;
+  font-size: 14px;
+}
+
+/* Mobile */
+@media (max-width: 850px) {
+  .test-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 0;
+  }
+
+  .combined-card {
+    padding: 27px 20px;
+  }
 }
 </style>
 </head>
+
 <body>
 <div class="wrap">
+
 <header>
   <h1>Biodiversity for Sustainability</h1>
-  <p class="subtitle">Select a quiz set to begin. Each set uses shuffled questions and options with instant scoring and correct/wrong feedback.</p>
+  <p class="subtitle">
+    Select a quiz set to begin. Each test opens separately in a new window.
+  </p>
 </header>
 
-<main class="grid">
+<!-- FIRST THREE TESTS: TOP LINE -->
+<main class="test-grid">
 
-    <article class="card">
-      <div class="topline">
-        <span class="badge">Weeks 1–4</span>
-        <span class="status">Available</span>
-      </div>
-      <h2>Biodiversity for Sustainability Assignments</h2>
-      <p>Practice questions covering Weeks 1–4 with shuffled questions and options.</p>
-      <div class="meta">40 questions</div>
-      <a class="btn" href="bfs-assignments.html">Open quiz</a>
-    </article>
-    
-    <article class="card">
-      <div class="topline">
-        <span class="badge">Weeks 5–8</span>
-        <span class="status">Available</span>
-      </div>
-      <h2>Biodiversity for Sustainability Assignments</h2>
-      <p>Practice questions covering Weeks 5–8 with shuffled questions and options.</p>
-      <div class="meta">40 questions</div>
-      <a class="btn" href="biodiversity-weeks-5-8.html">Open quiz</a>
-    </article>
-    
-    <article class="card">
-      <div class="topline">
-        <span class="badge">Weeks 9–12</span>
-        <span class="status">Coming soon</span>
-      </div>
-      <h2>Biodiversity for Sustainability Assignments</h2>
-      <p>Practice questions covering Weeks 9–12 with shuffled questions and options.</p>
-      <div class="meta">40 questions</div>
-      <a class="btn" href="biodiversity-weeks-9-12.html">Open quiz</a>
-    </article>
-    
-    <article class="card">
-      <div class="topline">
-        <span class="badge">All Weeks</span>
-        <span class="status">Coming soon</span>
-      </div>
-      <h2>Biodiversity for Sustainability — Complete Quiz</h2>
-      <p>Combined practice set covering Weeks 1–12 in one interactive quiz.</p>
-      <div class="meta">120 questions</div>
-      <a class="btn" href="biodiversity-all-weeks.html">Open quiz</a>
-    </article>
-    
+  <article class="card">
+    <span class="badge">Weeks 1–4</span>
+    <h2>Biodiversity for Sustainability Assignments</h2>
+    <p>
+      Practice quiz covering Weeks 1–4 with shuffled questions,
+      shuffled options, instant feedback, and scoring.
+    </p>
+    <div class="meta">40 questions</div>
+    <button class="open-btn"
+      onclick="openQuiz('bfs-assignments.html')">
+      Open Quiz
+    </button>
+  </article>
+
+  <article class="card">
+    <span class="badge">Weeks 5–8</span>
+    <h2>Biodiversity for Sustainability Assignments</h2>
+    <p>
+      Practice quiz covering Weeks 5–8 with shuffled questions,
+      shuffled options, instant feedback, and scoring.
+    </p>
+    <div class="meta">40 questions</div>
+    <button class="open-btn"
+      onclick="openQuiz('biodiversity-weeks-5-8.html')">
+      Open Quiz
+    </button>
+  </article>
+
+  <article class="card">
+    <span class="badge">Weeks 9–12</span>
+    <h2>Biodiversity for Sustainability Assignments</h2>
+    <p>
+      Practice quiz covering Weeks 9–12. The page is ready to be
+      connected when the Week 9–12 quiz file is added.
+    </p>
+    <div class="meta">40 questions</div>
+    <button class="open-btn"
+      onclick="openQuiz('biodiversity-weeks-9-12.html')">
+      Open Quiz
+    </button>
+  </article>
+
 </main>
 
-<div class="footer-note">In case of any errors mail to gj488@snu.edu.in</div>
+<!-- COMBINED QUIZ: BOTTOM LINE -->
+<section class="combined-wrapper">
+  <article class="combined-card">
+    <span class="badge">All Weeks</span>
+    <h2>Complete Biodiversity Quiz</h2>
+    <p>
+      Combined quiz containing all available weeks. Currently configured
+      for Weeks 1–8, with the quiz data designed to allow Weeks 9–12 to
+      be added later.
+    </p>
+    <div class="combined-meta">80 questions · Weeks 1–8</div>
+    <button class="open-btn combined-btn"
+      onclick="openQuiz('biodiversity-all-weeks.html')">
+      Open Combined Quiz
+    </button>
+  </article>
+</section>
+
+<div class="footer-note">
+  In case of any errors mail to gj488@snu.edu.in
 </div>
+
+</div>
+
+<script>
+function openQuiz(file) {
+  window.open(file, "_blank", "noopener,noreferrer");
+}
+</script>
+
 </body>
 </html>
