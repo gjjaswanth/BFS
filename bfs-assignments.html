@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>2026 Biodiversity for Sustainability Assignments</title><style>
+<title>2026 Biodiversity for Sustainability Assignments (Weeks 1–4)</title><style>
 :root{--bg:#f4f6f8;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--shadow:0 4px 12px rgba(0,0,0,.05);--green:#118a3a;--red:#c0262d;--button:#111827}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
 .wrap{max-width:1500px;margin:0 auto;padding:24px 18px 40px}header{text-align:center;padding:6px 0 20px}h1{font-size:clamp(30px,3.8vw,52px);line-height:1.1;margin:8px 0 6px;font-weight:800;color:#000}.subtitle{margin:0 auto;max-width:880px;color:var(--muted);font-size:14px}.toolbar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0 24px}
@@ -17,7 +17,7 @@ const quizData=[{"week": 1, "q": "Which of the following is included in invisibl
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function normalize(s){return String(s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[\u2019']/g,"'")}
 const questions=shuffle(quizData),form=document.getElementById("quizForm");
-document.getElementById("metaLine").textContent=`${questions.length} questions loaded. Questions and options are shuffled on each refresh.`;
+document.getElementById("metaLine").textContent=`${questions.length} questions loaded (Weeks 1–4). Questions and options are shuffled on each refresh.`;
 function escapeHtml(str){return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
 function render(){form.innerHTML="";questions.forEach((item,idx)=>{const card=document.createElement("div");card.className="question-card";const opts=shuffle(item.options);card.innerHTML=`<div class="qtop"><p class="qtitle">${idx+1}) ${escapeHtml(item.q)}</p><div class="week-badge">Week ${item.week}</div></div><div class="options">${opts.map(opt=>`<label class="opt"><input type="radio" name="q${idx}" value="${escapeHtml(opt)}"><span>${escapeHtml(opt)}</span></label>`).join("")}</div><div class="result" id="r${idx}"></div>`;form.appendChild(card)})}
 function submitQuiz(){let score=0,correct=0,wrong=0,blank=0;questions.forEach((item,idx)=>{const res=document.getElementById(`r${idx}`),selected=document.querySelector(`input[name="q${idx}"]:checked`);if(!selected){blank++;res.textContent=`❌ Not Answered | Correct: ${item.answer}`;res.className="result wrong"}else if(normalize(selected.value)===normalize(item.answer)){score++;correct++;res.textContent="✅ Correct";res.className="result correct"}else{wrong++;res.textContent=`❌ Wrong | Correct: ${item.answer}`;res.className="result wrong"}});document.getElementById("scoreBox").innerHTML=`Final Score: ${score} / ${questions.length} <span class="scoredetails">Correct: ${correct} &nbsp;|&nbsp; Wrong: ${wrong} &nbsp;|&nbsp; Not Answered: ${blank}</span>`;window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"})}
