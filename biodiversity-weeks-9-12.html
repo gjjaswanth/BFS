@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Biodiversity for Sustainability — Weeks 9–12</title>
+<style>
+:root{--bg:#f4f6f8;--card:#fff;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--shadow:0 4px 12px rgba(0,0,0,.05);--green:#118a3a;--red:#c0262d;--button:#111827}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:1500px;margin:0 auto;padding:24px 18px 40px}
+header{text-align:center;padding:6px 0 20px}
+h1{font-size:clamp(30px,3.8vw,52px);line-height:1.1;margin:8px 0 6px;font-weight:800;color:#000}
+.subtitle{margin:0 auto;max-width:900px;color:var(--muted);font-size:14px}
+.toolbar{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:18px 0 24px}
+button,.link-btn{appearance:none;border:0;border-radius:10px;padding:12px 22px;font-size:15px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.btn-primary{background:var(--button);color:#fff}.btn-secondary{background:#e5e7eb;color:#111827}
+.meta{text-align:center;margin:0 0 18px;color:var(--muted);font-size:14px}
+form{display:grid;gap:18px}
+.question-card{background:var(--card);border-radius:14px;box-shadow:var(--shadow);border:1px solid #f0f0f0;padding:18px 18px 14px}
+.qtop{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px}
+.qtitle{font-size:18px;line-height:1.55;margin:0;font-weight:500}
+.week-badge{flex:0 0 auto;font-size:12px;background:#eef2ff;color:#3730a3;padding:6px 10px;border-radius:999px;font-weight:700}
+.options{display:grid;gap:8px;margin-top:4px}
+label.opt{display:flex;gap:10px;align-items:flex-start;font-size:16px;line-height:1.45;cursor:pointer}
+label.opt input{
+  margin-top:4px;
+  width:18px;
+  height:18px;
+  appearance:none;
+  -webkit-appearance:none;
+  border:2px solid #9ca3af;
+  border-radius:50%;
+  background:#fff;
+  position:relative;
+  flex:0 0 18px;
+  cursor:pointer;
+}
+label.opt input:checked{
+  border-color:#6b7280;
+}
+label.opt input:checked::after{
+  content:"";
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#374151;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.result{margin-top:12px;font-weight:700;min-height:24px;font-size:15px}
+.correct{color:var(--green)}.wrong{color:var(--red)}
+.scorebox{margin-top:20px;padding:16px 18px;background:#fff;border:1px solid #e5e7eb;border-radius:14px;box-shadow:var(--shadow);font-size:18px;font-weight:800;text-align:center}
+.scoredetails{display:block;margin-top:8px;font-size:14px;color:var(--muted);font-weight:600}
+.sticky-submit{position:sticky;bottom:14px;z-index:5;display:flex;justify-content:center;margin-top:10px}
+.sticky-submit button{box-shadow:0 10px 24px rgba(0,0,0,.12)}
+@media(max-width:700px){.qtitle{font-size:17px}label.opt{font-size:15px}.question-card{padding:16px 14px 12px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>2026 Biodiversity for Sustainability</h1>
+<p class="subtitle">Interactive quiz for Weeks 9–12 with shuffled questions, shuffled options, instant scoring, and correct/wrong feedback after submission.</p>
+</header>
+<div class="toolbar">
+<a class="link-btn btn-secondary" href="./index.html">Home</a>
+<button class="btn-primary" type="button" onclick="submitQuiz()">Submit</button>
+<button class="btn-secondary" type="button" onclick="resetQuiz()">Reset</button>
+</div>
+<div class="meta" id="metaLine"></div>
+<form id="quizForm"></form>
+<div class="sticky-submit"><button class="btn-primary" type="button" onclick="submitQuiz()">Submit</button></div>
+<div class="scorebox" id="scoreBox">Submit the quiz to see your score.</div>
+</div>
+
+<script>
+const quizData=[{"week": 9, "q": "What does infectivity mean?", "options": ["Ability of a pathogen to establish infection after exposure", "Severity of disease caused after symptoms appear", "Probability that a diseased animal dies", "Number of carcasses found in an outbreak zone"], "answer": "Ability of a pathogen to establish infection after exposure"}, {"week": 9, "q": "Which statement best describes wildlife health in conservation management?", "options": ["A fixed condition measured only by absence of visible injury", "A veterinary issue unrelated to population survival", "A dynamic state involving normal function at individual, population, and ecosystem levels", "A measure based only on body size and population count"], "answer": "A dynamic state involving normal function at individual, population, and ecosystem levels"}, {"week": 9, "q": "What is a dead-end host?", "options": ["A host that increases pathogen abundance", "A host that becomes infected but does not sustain further transmission", "A host that always acts as a biological vector", "A host that supports the complete adult parasite cycle"], "answer": "A host that becomes infected but does not sustain further transmission"}, {"week": 9, "q": "What is disease in wildlife health assessment?", "options": ["A condition that disrupts normal function and may affect behavior, physiology, reproduction, or survival", "A temporary injury that always results from external trauma", "A normal ecological process that never affects conservation outcomes", "A population increase caused by improved habitat quality"], "answer": "A condition that disrupts normal function and may affect behavior, physiology, reproduction, or survival"}, {"week": 9, "q": "Which action is central to anthrax management in wildlife areas?", "options": ["Opening carcasses immediately for visual diagnosis", "Careful carcass handling to reduce environmental contamination", "Increasing scavenger access to remove infected remains", "Moving infected carcasses to shared grazing areas"], "answer": "Careful carcass handling to reduce environmental contamination"}, {"week": 9, "q": "Which description best fits an acute disease?", "options": ["Slow onset with subtle signs over many years", "Rapid onset, short duration, and possible sudden mortality events", "Low disease burden with no visible population impact", "Permanent genetic condition passed through inheritance only"], "answer": "Rapid onset, short duration, and possible sudden mortality events"}, {"week": 9, "q": "What does sporadic disease occurrence mean?", "options": ["Disease that persists regularly in a local reservoir", "Irregular and isolated disease occurrence without a predictable pattern", "Sudden mass mortality across multiple countries", "Continuous spread through every susceptible host"], "answer": "Irregular and isolated disease occurrence without a predictable pattern"}, {"week": 9, "q": "What is horizontal transmission?", "options": ["Transmission between individuals of the same generation", "Transmission only through inherited genetic traits", "Transmission only through contaminated soil", "Transmission only from domestic animals to wildlife"], "answer": "Transmission between individuals of the same generation"}, {"week": 9, "q": "Which is an example of a precipitating factor?", "options": ["Old age lowering resistance over time", "Strong immunity reducing spread", "Migration stress triggering disease expression in already susceptible animals", "Genetic diversity improving population resilience"], "answer": "Migration stress triggering disease expression in already susceptible animals"}, {"week": 9, "q": "What does virulence describe?", "options": ["Number of species living in the disease area", "Proportion of animals with background immunity", "Severity of disease caused by a pathogen", "Amount of rainfall before an outbreak"], "answer": "Severity of disease caused by a pathogen"}, {"week": 10, "q": "Why should captive enclosures be habitat-like?", "options": ["To reduce documentation requirements", "To support natural movement, behaviour, welfare, health, and breeding", "To make all species follow the same diet", "To avoid scientific management"], "answer": "To support natural movement, behaviour, welfare, health, and breeding"}, {"week": 10, "q": "Why is representative sampling important in ex-situ conservation?", "options": ["It ensures only the best-looking individuals are collected", "It helps capture genetic variation and avoid loss of alleles", "It prevents the need for records", "It replaces future restoration planning"], "answer": "It helps capture genetic variation and avoid loss of alleles"}, {"week": 10, "q": "Why are compact or circular reserves generally preferred where feasible?", "options": ["They are easier to convert into zoos", "They have higher edge-to-area pressure", "They usually reduce edge effects and outside disturbance", "They prevent natural dispersal"], "answer": "They usually reduce edge effects and outside disturbance"}, {"week": 10, "q": "A fragmented landscape with isolated wildlife populations mainly requires which management focus?", "options": ["Connectivity planning", "Captive display planning", "Scenic viewpoint development", "Uniform fencing across all habitats"], "answer": "Connectivity planning"}, {"week": 10, "q": "Which group correctly represents protected-area categories used for in-situ conservation in India?", "options": ["National Park, Sanctuary, Conservation Reserve, and Community Reserve", "Zoo, aquarium, seed bank, and cryobank", "Arboretum, bambusetum, gene bank, and rescue centre", "Nursery, enclosure, corridor map, and field camp"], "answer": "National Park, Sanctuary, Conservation Reserve, and Community Reserve"}, {"week": 10, "q": "Pollination, seed dispersal, predation, decomposition, and nutrient cycling are important because they represent which aspect of biodiversity management?", "options": ["Revenue generation", "Boundary demarcation", "Ecological function", "Species display"], "answer": "Ecological function"}, {"week": 10, "q": "What does ex-situ conservation involve?", "options": ["Maintaining species only through community grazing systems", "Protecting species only by expanding natural corridors", "Preventing all movement of species between facilities", "Moving species or genetic material to designated facilities outside natural habitats"], "answer": "Moving species or genetic material to designated facilities outside natural habitats"}, {"week": 10, "q": "Why can reserved forests be strategically useful for faster sanctuary notification?", "options": ["They require no ecological significance", "They are automatically free from all human use", "They are suitable only for ex-situ conservation", "Their land status, boundaries, records, and rights position are often already well structured or documented"], "answer": "Their land status, boundaries, records, and rights position are often already well structured or documented"}, {"week": 10, "q": "What is the main function of studbooks in conservation breeding?", "options": ["They record ancestry, births, deaths, transfers, and breeding history to guide management", "They replace veterinary care", "They identify tourist routes inside zoos", "They eliminate the need for genetic diversity"], "answer": "They record ancestry, births, deaths, transfers, and breeding history to guide management"}, {"week": 10, "q": "Why is ex-situ conservation described as an insurance strategy?", "options": ["It guarantees automatic reintroduction success", "It prevents immediate extinction in high-risk cases and preserves individuals or genetic material outside threatened habitats", "It removes the need for genetic management", "It works best when habitat loss continues unchecked"], "answer": "It prevents immediate extinction in high-risk cases and preserves individuals or genetic material outside threatened habitats"}, {"week": 11, "q": "What is the main purpose of PIT tags?", "options": ["To sedate animals during transport", "To create artificial movement routes", "To prevent conflict with livestock", "To allow long-term individual identification"], "answer": "To allow long-term individual identification"}, {"week": 11, "q": "Which practice is appropriate while physically handling small reptiles?", "options": ["Holding only the tail to restrict movement", "Supporting the body and avoiding squeezing", "Keeping the animal exposed to heat for long periods", "Applying pressure to the abdomen for control"], "answer": "Supporting the body and avoiding squeezing"}, {"week": 11, "q": "Which statement reflects the central caution in habitat management?", "options": ["Fire and grazing always damage habitats", "Water provisioning is always beneficial", "Management tools can help or harm depending on timing, intensity, location, and monitoring", "Plantation is automatically equal to restoration"], "answer": "Management tools can help or harm depending on timing, intensity, location, and monitoring"}, {"week": 11, "q": "When is a jab stick most suitable?", "options": ["When the animal is distant and hidden in dense vegetation", "When the animal is approachable, confined, or partially restrained", "When no trained personnel are available", "When the animal must be monitored from the air"], "answer": "When the animal is approachable, confined, or partially restrained"}, {"week": 11, "q": "Which type of wildfire burns treetops and can spread rapidly?", "options": ["Ground fire", "Surface fire", "Crown fire", "Prescribed fire"], "answer": "Crown fire"}, {"week": 11, "q": "Which form of restraint is based on training, conditioning, or desensitisation?", "options": ["Behavioural restraint", "Physical restraint", "Chemical restraint", "Mechanical restraint"], "answer": "Behavioural restraint"}, {"week": 11, "q": "Which form of restraint uses cages, traps, poles, nets, or chutes?", "options": ["Chemical restraint", "Behavioural restraint", "Physical restraint", "Mechanical restraint"], "answer": "Mechanical restraint"}, {"week": 11, "q": "Which statement best describes a Ketch-All pole?", "options": ["It is used to create long-term animal enclosures", "It is a device for measuring animal temperature", "It provides short-distance control while keeping handlers away", "It is used to guide animals into pitfall traps"], "answer": "It provides short-distance control while keeping handlers away"}, {"week": 11, "q": "Which drug group immobilises animals through paralysis of voluntary muscles without providing sedation or analgesia?", "options": ["CNS depressants", "Tranquillisers", "Dissociatives", "Neuromuscular blockers"], "answer": "Neuromuscular blockers"}, {"week": 11, "q": "Which is a physical effect of wildfire?", "options": ["Endocrine disruption", "Hydrophobic soil reducing infiltration and increasing runoff", "Dart leakage during immobilisation", "Formation of ghost nets"], "answer": "Hydrophobic soil reducing infiltration and increasing runoff"}, {"week": 12, "q": "What should fences do in wildlife-road mitigation?", "options": ["Block all animal movement permanently", "Guide animals toward safe crossing structures", "Increase vehicle speed near hotspots", "Replace monitoring after construction"], "answer": "Guide animals toward safe crossing structures"}, {"week": 12, "q": "Which of the following is an example of linear infrastructure?", "options": ["Wetland food web", "Railway", "Tiger population", "Carbon stock"], "answer": "Railway"}, {"week": 12, "q": "What is the barrier effect of a road?", "options": ["A road becomes wider after repeated use", "Animals are attracted to vegetation along road edges", "Animals avoid crossing, reducing movement between habitat areas", "Roadside soil becomes more fertile due to runoff"], "answer": "Animals avoid crossing, reducing movement between habitat areas"}, {"week": 12, "q": "What is Total Economic Value designed to capture?", "options": ["Only direct market income from biodiversity", "Only tourism earnings from protected areas", "Both use and non-use values", "Only the cost of artificial habitat restoration"], "answer": "Both use and non-use values"}, {"week": 12, "q": "Which valuation method uses surveys to ask willingness to pay for conservation?", "options": ["Market price method", "Benefits transfer method", "Contingent valuation method", "Damage cost avoided method"], "answer": "Contingent valuation method"}, {"week": 12, "q": "What is linear infrastructure?", "options": ["Facilities that extend as lines across landscapes", "A protected-area zoning system based on circles", "A method for valuing non-use benefits", "A seasonal migration pattern of animals"], "answer": "Facilities that extend as lines across landscapes"}, {"week": 12, "q": "What is an oil spill?", "options": ["A gradual increase in salt concentration in coastal water", "The release of liquid petroleum hydrocarbons into the environment", "The natural movement of sediments along a shoreline", "The biological decay of organic matter in wetlands"], "answer": "The release of liquid petroleum hydrocarbons into the environment"}, {"week": 12, "q": "Which structure is designed for arboreal mammals and some reptiles?", "options": ["Canopy bridge", "In-situ burn area", "Skimmer channel", "Benefits-transfer site"], "answer": "Canopy bridge"}, {"week": 12, "q": "Which mitigation hierarchy step means keeping infrastructure away from critical habitat where possible?", "options": ["Restore", "Offset", "Minimise", "Avoid"], "answer": "Avoid"}, {"week": 12, "q": "Which compounds are especially associated with toxicity in petroleum oil?", "options": ["Biogenic sugars", "Pyrogenic salts", "Aromatic hydrocarbons, especially PAHs", "Soil nutrients"], "answer": "Aromatic hydrocarbons, especially PAHs"}];
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+  return a;
+}
+function normalize(s){
+  return String(s||"").trim().toLowerCase().replace(/\s+/g," ").replace(/[\u2019']/g,"'");
+}
+const questions=shuffle(quizData),form=document.getElementById("quizForm");
+document.getElementById("metaLine").textContent=`${questions.length} questions loaded. Questions and options are shuffled on each refresh.`;
+
+function escapeHtml(str){
+  return String(str).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+function render(){
+  form.innerHTML="";
+  questions.forEach((item,idx)=>{
+    const card=document.createElement("div");
+    card.className="question-card";
+    const opts=shuffle(item.options);
+    card.innerHTML=`<div class="qtop">
+      <p class="qtitle">${idx+1}) ${escapeHtml(item.q)}</p>
+      <div class="week-badge">Week ${item.week}</div>
+    </div>
+    <div class="options">${opts.map(opt=>`<label class="opt">
+      <input type="radio" name="q${idx}" value="${escapeHtml(opt)}">
+      <span>${escapeHtml(opt)}</span>
+    </label>`).join("")}</div>
+    <div class="result" id="r${idx}"></div>`;
+    form.appendChild(card);
+  });
+}
+
+function submitQuiz(){
+  let score=0,correct=0,wrong=0,blank=0;
+  questions.forEach((item,idx)=>{
+    const res=document.getElementById(`r${idx}`);
+    const selected=document.querySelector(`input[name="q${idx}"]:checked`);
+    if(!selected){
+      blank++;
+      res.textContent=`❌ Not Answered | Correct: ${item.answer}`;
+      res.className="result wrong";
+    } else if(normalize(selected.value)===normalize(item.answer)){
+      score++;correct++;
+      res.textContent="✅ Correct";
+      res.className="result correct";
+    } else {
+      wrong++;
+      res.textContent=`❌ Wrong | Correct: ${item.answer}`;
+      res.className="result wrong";
+    }
+  });
+  document.getElementById("scoreBox").innerHTML=`Final Score: ${score} / ${questions.length}
+    <span class="scoredetails">Correct: ${correct} &nbsp;|&nbsp; Wrong: ${wrong} &nbsp;|&nbsp; Not Answered: ${blank}</span>`;
+  window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+}
+
+function resetQuiz(){
+  render();
+  document.getElementById("scoreBox").textContent="Submit the quiz to see your score.";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+render();
+</script>
+</body>
+</html>
